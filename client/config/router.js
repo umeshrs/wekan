@@ -3,9 +3,23 @@ FlowRouter.triggers.exit([({path}) => {
   previousPath = path;
 }]);
 
+function checkToken(context) {
+  console.log('--------------------------------------------------');
+  console.log("Wekan router: Received request for route '/'. Query params: ", context.queryParams);
+
+  if (context.queryParams && context.queryParams.token) {
+    console.log('Valid token');
+    localStorage.setItem('Meteor.loginToken', context.queryParams.token);
+  }
+  else {
+    console.log('Invalid token.');
+  }
+  console.log('--------------------------------------------------');
+}
+
 FlowRouter.route('/', {
   name: 'home',
-  triggersEnter: [AccountsTemplates.ensureSignedIn],
+  triggersEnter: [checkToken],
   action() {
     Session.set('currentBoard', null);
     Session.set('currentCard', null);
