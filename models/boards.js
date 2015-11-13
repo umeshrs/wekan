@@ -274,7 +274,7 @@ Boards.before.insert((userId, doc) => {
     isActive: true,
   }];
   doc.stars = 0;
-  doc.color = Boards.simpleSchema()._schema.color.allowedValues[0];
+  doc.color = Boards.simpleSchema()._schema.color.allowedValues[5];
 
   // Handle labels
   const colors = Boards.simpleSchema()._schema['labels.$.color'].allowedValues;
